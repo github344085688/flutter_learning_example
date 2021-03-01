@@ -42,6 +42,8 @@ dependencies:
   transparent_image: ^1.0.0 #图片占位  transparent_image: any
   flutter_local_notifications: ^4.0.0 #弹通知栏插件
   qrscan: ^0.2.22 #扫一扫
+  amap_flutter_map: ^1.0.2 #插件来完成的高德地图的集成
+  permission_handler: ^5.1.0+2 #动态权限方案
   #  fluttertoast: any #弹窗，
 
 

@@ -5,7 +5,7 @@ import './home_search_page.dart';
 import './home_body.dart';
 import './home_person.dart';
 import 'package:flutter_learning_example/mainApp/homePage/popup_menu_button/popup_menu_button_view.dart';
-// import 'package:flutter_learning_example/mainApp/homePage/map_location/location_map.dart';
+import 'package:flutter_learning_example/mainApp/homePage/map_location/location_map.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
 
@@ -103,9 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) => FloatingActionButton(
           backgroundColor: Color(0xffd55858),
           // onPressed: () => Scaffold.of(context).openDrawer(),
-         /* onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+          onPressed: () => Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => LocationMap()),
-                  (route) => true),*/
+                  (route) => true),
           child: Icon(Icons.add_location_alt_outlined),
           elevation: 3.0,
         ),

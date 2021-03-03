@@ -6,6 +6,7 @@ import 'package:flutter_learning_example/mainApp/homePage/popup_menu_button/loca
 import 'package:flutter_learning_example/mainApp/utilities/local_notifications_view_moudle.dart';
 import 'package:flutter_learning_example/mainApp/homePage/popup_menu_button/popup_menu_button_view_moule.dart';
 import 'package:flutter_learning_example/mainApp/homePage/popup_menu_button/local_scan_ex.dart';
+import 'package:flutter_learning_example/mainApp/homePage/map_location/location-page.dart';
 class HomePopupMenuButton extends StatefulWidget {
   const HomePopupMenuButton({Key key}) : super(key: key);
 
@@ -152,6 +153,25 @@ class _HomePopupMenuButton extends State<HomePopupMenuButton> {
           ],
         ),
       ),
+      PopupMenuDivider(
+        height: 3.0,
+      ),
+      PopupMenuItem<String>(
+        value: 'location',
+        child: Flex(
+          direction: Axis.horizontal,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Icon(Icons.add_location,color:Colors.black38),
+            ),
+            Expanded(
+              flex: 2,
+              child: Text('Location'),
+            ),
+          ],
+        ),
+      ),
     ];
   }
 
@@ -183,6 +203,11 @@ class _HomePopupMenuButton extends State<HomePopupMenuButton> {
       case 'qrscan':
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LocalScan()),
+                (route) => true);
+        break;
+      case 'location':
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LocationPage()),
                 (route) => true);
         break;
       default:

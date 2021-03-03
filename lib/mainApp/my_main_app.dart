@@ -5,48 +5,59 @@ import 'package:provider/provider.dart';
 import 'package:flutter_learning_example/flutter_pub/provider/counter.dart';
 import 'package:flutter_learning_example/mainApp/routers/my_routers.dart'
     show homeRoute;
+import 'package:permission_handler/permission_handler.dart';
+
+final List<Permission> needPermissionList = [
+  Permission.location,
+  Permission.storage,
+  Permission.phone,
+  Permission.camera,
+];
+
 class MyMainApp extends StatelessWidget {
   const MyMainApp({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-        providers:[
-          ChangeNotifierProvider.value(value: Counter(1))
-        ],
-        child: _MyMainApp()
-    );
-   /** return ChangeNotifierProvider<Counter>.value(
-        value: Counter(1),
-        child: _MyMainApp()
-    );*/
-  }
-}
-/**
-class _MyMainApp extends StatelessWidget {
-  const _MyMainApp({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Main App Flutter',
-      routes: rootAppRoutingTable,
-    );
-  }
+  Widget build(BuildContext context) => MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: Counter(1))],
+      child: MyMainAppState());
 }
 
- */
-class _MyMainApp extends StatelessWidget {
-  const _MyMainApp({Key key}) : super(key: key);
+class MyMainAppState extends StatefulWidget {
+  MyMainAppState({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Main App Flutter',
-      home: homeRoute.child,
-      // Navigator.defaultRouteName: (context) => homeRoute,
-      onGenerateRoute: onGenerateRoute,
-    );
+  _MyMainAppState createState() => _MyMainAppState();
+}
+
+class _MyMainAppState extends State<MyMainAppState> {
+  @override
+  void initState() {
+    super.initState();
+    _checkPermissions();
   }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    _checkPermissions();
+  }
+
+  void _checkPermissions() async {
+    Map<Permission, PermissionStatus> statuses =
+        await needPermissionList.request();
+    statuses.forEach((key, value) {
+      print('$key ============--------------------- is $value');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'My Main App Flutter',
+        home: homeRoute.child,
+        // Navigator.defaultRouteName: (context) => homeRoute,
+        onGenerateRoute: onGenerateRoute,
+      );
 }
 
 //Navigator.pushNamed 调用（在router跳转时候调用发生。）
@@ -60,7 +71,7 @@ var onGenerateRoute = (RouteSettings settings) {
   if (pageContentBuilder != null) {
     //在router跳转时候处理arguments
     if (settings.arguments != null) {
-      final Route route =   MaterialPageRoute(
+      final Route route = MaterialPageRoute(
         builder: (context) {
           //将RouteSettings中的arguments参数取出来，通过构造函数传入
           return pageContentBuilder(context, arguments: settings.arguments);

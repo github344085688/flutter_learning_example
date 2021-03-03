@@ -65,8 +65,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            //高德定位
+            manifestPlaceholders = [ AMAP_KEY:"1052b827e4de740c08f6ce3f8266fdc4" ]
+        }
         //添加如下配置关闭混淆
         release {
+            //高德定位
+            manifestPlaceholders = [ AMAP_KEY:"1052b827e4de740c08f6ce3f8266fdc4" ]
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
@@ -82,6 +89,8 @@ flutter {
 }
 
 dependencies {
+    // 注意这里需要在主项目增加一条依赖，否则可能发生编译不通过的情况
+    implementation 'com.amap.api:location:latest.integration'
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //添加demo中引入高德地图SDK

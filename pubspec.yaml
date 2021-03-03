@@ -42,9 +42,13 @@ dependencies:
   transparent_image: ^1.0.0 #图片占位  transparent_image: any
   flutter_local_notifications: ^4.0.0 #弹通知栏插件
   qrscan: ^0.2.22 #扫一扫
-  amap_flutter_map: ^1.0.2 #插件来完成的高德地图的集成
+  amap_flutter_map: ^1.0.2 #amap插件来完成的高德地图的集成
   permission_handler: ^5.1.0+2 #动态权限方案
-  #  fluttertoast: any #弹窗，
+  amap_location: ^0.2.0 #amap定位
+#  amap_search_fluttify: ^0.16.2 #高德地图搜索组件
+#  latlng: any #latlng，用于常见的纬度和经度计算。＃
+#  amap_flutter_location: any #latlng，用于常见的纬度和经度计算。＃
+#  fluttertoast: any #弹窗，
 
 
   # The following adds the Cupertino Icons font to your application.
